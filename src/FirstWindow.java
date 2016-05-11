@@ -28,16 +28,6 @@ public class FirstWindow extends JFrame {
 			}
 		});
 
-		c.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// JOptionPane.showMessageDialog(null, "Good job!");
-				Level1 lvl2 = new Level1();
-				lvl2.setVisible(true);
-
-			}
-		});
-
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(15, 15, 15, 15);
 
