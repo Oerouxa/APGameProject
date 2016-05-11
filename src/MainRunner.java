@@ -4,6 +4,7 @@ public class MainRunner {
 		FirstWindow fw = new FirstWindow();
 		fw.setVisible(true);
 
+		// this is the version you should have !
 
 	}
 }
