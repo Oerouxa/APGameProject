@@ -1,3 +1,4 @@
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,6 +11,12 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 public class MazeGame extends JFrame {
+
+	/*
+	 * The idea behind this game is to be able to manipulate a graphic. Once
+	 * this is possible, create a maze game. When it is done, we will move to
+	 * the next game.
+	 */
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,32 +33,8 @@ public class MazeGame extends JFrame {
 
 	public void createBlackSquare(Graphics g) {
 		g.drawRect(x, y, 50, 50);
-		g.setColor(Color.RED);
+		g.setColor(Color.BLACK);
 		// g.fillRect(x, y, 50, 50);
-	}
-
-	private class DrawStuff extends JComponent {
-
-		public void paint(Graphics g) {
-
-			Graphics2D character = (Graphics2D) g;
-
-			character.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-			//Shape drawRoundRec = new RoundRectangle2D.Double(0, 0, 50, 50, 45, 45);
-
-			character.setPaint(Color.BLACK);
-
-			character.setColor(Color.RED);
-
-		//	character.fill(drawRoundRec);
-
-			character.setPaint(Color.BLACK);
-
-			character.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.40F));
-
-		}
-
 	}
 
 	public static void main(String[] args) {
