@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-// Anime Rocks!
+// KAITO
 class TestMovingObj extends JPanel implements ActionListener, KeyListener{
  Timer tm = new Timer(5, this);
  int x=0, y=0, velX=0, velY=0;
