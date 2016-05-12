@@ -36,6 +36,7 @@ public class MazeGame extends JFrame {
 		g.setColor(Color.BLACK);
 		// g.fillRect(x, y, 50, 50);
 	}
+	
 
 	public static void main(String[] args) {
 		// MazeGame maze = new MazeGame();
