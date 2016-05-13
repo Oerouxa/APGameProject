@@ -24,7 +24,7 @@ public class MazeGame extends JFrame {
 
 		super("Maze Game");
 		// MazeGame maze = new MazeGame();
-		setSize(750, 750);
+		setSize(1000, 350);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		// super.add(maze);
 	}
