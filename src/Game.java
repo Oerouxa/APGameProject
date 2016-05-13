@@ -17,11 +17,12 @@ public class Game extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		bottom.setBackground(Color.BLUE);
-		add(bottom, BorderLayout.NORTH);
-		top.setBackground(Color.RED);
-		add(top, BorderLayout.SOUTH);
-
+		top.setBackground(Color.BLUE);
+		add(top);
+		// top.setLocation(50, 50);
+		bottom.setBackground(Color.RED);
+		add(bottom, BorderLayout.SOUTH); // , BorderLayout.SOUTH
+		// bottom.setLocation(300, 300);
 	}
 
 	public static void main(String args[]) {
