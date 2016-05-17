@@ -1,4 +1,4 @@
-package getTheCoins;
+
 
 import java.awt.Graphics;
 
