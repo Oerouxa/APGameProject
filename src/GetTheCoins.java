@@ -1,5 +1,4 @@
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -42,7 +41,7 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 		rand = new Random();
 
 		jframe.add(renderer);
-		jframe.setTitle("Get the coins !");
+		jframe.setTitle("Get the coins ! by Georgia, Carla and Nidhi");
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setSize(WIDTH, HEIGHT);
 		jframe.addMouseListener(this);
@@ -59,19 +58,22 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 	}
 
 	public void addCoin(boolean start) {
-		int space = 300;
-		int width = 100;
-		int height = 50 + rand.nextInt(300);
+		int width = 50;
+		int height = 50;
 
 		if (start) {
 			// add coins
-		} else {
-			// add coins
+			for (int n = 0; n < 100; n++) {
+				Random randomHeight = new Random();
+				int result = randomHeight.nextInt(HEIGHT - 160);// +1
+
+				coins.add(new Rectangle(WIDTH + width + (coins.size() - 1) * 300, result, width, height));
+			}
 		}
 	}
 
 	public void paintCoin(Graphics g, Rectangle coin) {
-		g.setColor(Color.green.darker());
+		g.setColor(Color.yellow);
 		g.fillRect(coin.x, coin.y, coin.width, coin.height);
 	}
 
@@ -81,6 +83,8 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 			coins.clear();
 			yMotion = 0;
 			score = 0;
+
+			addCoin(true);
 
 			gameOver = false;
 		}
@@ -97,62 +101,43 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) { // part to be changed asap
-		int speed = 10; // if changed, count points changed
+	public void actionPerformed(ActionEvent e) {
+		int speed = 10;
 
 		ticks++;
 
 		if (started) {
-			// for (int i = 0; i < coins.size(); i++) {
-			// Rectangle coin = coins.get(i);
-			//
-			// coin.x -= speed;
-			// }
+			for (int i = 0; i < coins.size(); i++) {
+				Rectangle coin = coins.get(i);
+
+				coin.x -= speed;
+			}
 
 			if (ticks % 2 == 0 && yMotion < 15) {
 				yMotion += 2;
 			}
 
-			// for (int i = 0; i < coins.size(); i++) {
-			// Rectangle coin = coins.get(i);
-			//
-			// if (coin.x + coin.width < 0) {
-			// coins.remove(coin);
-			//
-			// if (coin.y == 0) {
-			// addcoin(false);
-			// }
-			// }
-			// }
+			for (int i = 0; i < coins.size(); i++) {
+				Rectangle coin = coins.get(i);
+
+				if (coin.x + coin.width < 0) {
+					coins.remove(coin);
+
+					if (coin.y == 0) {
+						addCoin(false);
+					}
+				}
+			}
 
 			bird.y += yMotion;
 
-			/**
-			 * collision detection ? if touched die.
-			 */
+			for (Rectangle coin : coins) {
 
-			// for (Rectangle coin : coins) {
-			// if (coin.y == 0 && bird.x + bird.width / 2 > coin.x +
-			// coin.width / 2 - 10
-			// && bird.x + bird.width / 2 < coin.x + coin.width / 2 + 10) {
-			// score++;
-			// }
-			//
-			// if (coin.intersects(bird)) {
-			// gameOver = true;
-			//
-			// if (bird.x <= coin.x) {
-			// bird.x = coin.x - bird.width;
-			//
-			// } else {
-			// if (coin.y != 0) {
-			// bird.y = coin.y - bird.height;
-			// } else if (bird.y < coin.height) {
-			// bird.y = coin.height;
-			// }
-			// }
-			// }
-			// }
+				if (coin.intersects(bird)) {
+					gameOver = false;
+					score += 1;
+				}
+			}
 
 			if (bird.y > HEIGHT - 120 || bird.y < 0) {
 				gameOver = true;
@@ -185,18 +170,18 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 		}
 
 		g.setColor(Color.white);
-		g.setFont(new Font("Arial", 1, 100));
+		g.setFont(new Font("Georgia", 1, 50));
 
 		if (!started) {
 			g.drawString("Click to start!", 75, HEIGHT / 2 - 50);
 		}
 
 		if (gameOver) {
-			g.drawString("Game Over!", 100, HEIGHT / 2 - 50);
+			g.drawString("Game Over!     Score : " + String.valueOf(score), 100, HEIGHT / 2 - 50);
 		}
 
 		if (!gameOver && started) {
-			g.drawString(String.valueOf(score), WIDTH / 2 - 25, 100);
+			g.drawString("Score : " + String.valueOf(score), WIDTH / 2 - 25, 100);
 		}
 	}
 
