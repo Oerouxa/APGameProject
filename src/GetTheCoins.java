@@ -52,7 +52,7 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 		bird = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
 		coins = new ArrayList<Rectangle>();
 
-		addCoin(true); // add more than 1 ?
+		addCoin(true); 
 
 		timer.start();
 	}
@@ -63,9 +63,9 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 
 		if (start) {
 			// add coins
-			for (int n = 0; n < 100; n++) {
+			for (int n = 0; n < 1000; n++) {
 				Random randomHeight = new Random();
-				int result = randomHeight.nextInt(HEIGHT - 160);// +1
+				int result = randomHeight.nextInt(HEIGHT - 250)+50;
 
 				coins.add(new Rectangle(WIDTH + width + (coins.size() - 1) * 300, result, width, height));
 			}
@@ -156,13 +156,13 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
-		g.setColor(Color.orange);
+		g.setColor(Color.green.darker());
 		g.fillRect(0, HEIGHT - 120, WIDTH, 120);
 
 		g.setColor(Color.green);
 		g.fillRect(0, HEIGHT - 120, WIDTH, 20);
 
-		g.setColor(Color.red);
+		g.setColor(Color.magenta);
 		g.fillRect(bird.x, bird.y, bird.width, bird.height);
 
 		for (Rectangle coin : coins) {
@@ -170,10 +170,10 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 		}
 
 		g.setColor(Color.white);
-		g.setFont(new Font("Georgia", 1, 50));
+		g.setFont(new Font("Georgia", 1, 40));
 
 		if (!started) {
-			g.drawString("Click to start!", 75, HEIGHT / 2 - 50);
+			g.drawString("Click to start! (try to get the coins)", 75, HEIGHT / 2 - 50);
 		}
 
 		if (gameOver) {
