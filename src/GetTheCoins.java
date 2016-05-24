@@ -1,16 +1,13 @@
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.Random;
+/**
+ * Game by Georgia Bjarstal, Carla Balboa and Nidhi Yagnik. 
+ * The game consists in moving a bird to try to get coins. The 
+ * longer you touch a coin, the more points you get.
+ */
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -28,6 +25,7 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 	public ArrayList<Rectangle> coins;
 
 	public int ticks, yMotion, score;
+	// yMotion is the position of the bird on the frame
 
 	public boolean gameOver, started;
 
@@ -52,7 +50,7 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 		bird = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
 		coins = new ArrayList<Rectangle>();
 
-		addCoin(true); 
+		addCoin(true);
 
 		timer.start();
 	}
@@ -62,31 +60,41 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 		int height = 50;
 
 		if (start) {
-			// add coins
-			for (int n = 0; n < 1000; n++) {
+			for (int n = 0; n < 1000; n++) { // gives the number of coins in the
+												// game
 				Random randomHeight = new Random();
-				int result = randomHeight.nextInt(HEIGHT - 250)+50;
+				int result = randomHeight.nextInt(HEIGHT - 250) + 50; // position
+																		// of
+																		// the
+																		// coin
+																		// in
+																		// the
+																		// game
 
-				coins.add(new Rectangle(WIDTH + width + (coins.size() - 1) * 300, result, width, height));
+				coins.add(new Rectangle(WIDTH + width + (coins.size() - 1) * 300, result, width, height)); // adds
+																											// coins
 			}
 		}
 	}
 
 	public void paintCoin(Graphics g, Rectangle coin) {
-		g.setColor(Color.yellow);
-		g.fillRect(coin.x, coin.y, coin.width, coin.height);
+		g.setColor(Color.yellow); // gives a yellow color to the coin
+		g.fillOval(coin.x, coin.y, coin.width, coin.height); // makes the coin
+																// round
 	}
 
 	public void jump() {
 		if (gameOver) {
-			bird = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
+			bird = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20); // creates
+																			// the
+																			// bird
 			coins.clear();
 			yMotion = 0;
 			score = 0;
 
 			addCoin(true);
 
-			gameOver = false;
+			gameOver = false; // makes the game restart
 		}
 
 		if (!started) {
@@ -110,23 +118,11 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 			for (int i = 0; i < coins.size(); i++) {
 				Rectangle coin = coins.get(i);
 
-				coin.x -= speed;
+				coin.x -= speed; // makes the coins move
 			}
 
 			if (ticks % 2 == 0 && yMotion < 15) {
 				yMotion += 2;
-			}
-
-			for (int i = 0; i < coins.size(); i++) {
-				Rectangle coin = coins.get(i);
-
-				if (coin.x + coin.width < 0) {
-					coins.remove(coin);
-
-					if (coin.y == 0) {
-						addCoin(false);
-					}
-				}
 			}
 
 			bird.y += yMotion;
@@ -136,14 +132,15 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 				if (coin.intersects(bird)) {
 					gameOver = false;
 					score += 1;
+					// add call for method music here
 				}
 			}
 
-			if (bird.y > HEIGHT - 120 || bird.y < 0) {
+			if (bird.y > HEIGHT - 120 || bird.y < 0) { // border top
 				gameOver = true;
 			}
 
-			if (bird.y + yMotion >= HEIGHT - 120) {
+			if (bird.y + yMotion >= HEIGHT - 120) { // border bottom
 				bird.y = HEIGHT - 120 - bird.height;
 				gameOver = true;
 			}
@@ -153,15 +150,17 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 	}
 
 	public void repaint(Graphics g) {
+		// color background
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
+		// color of grass
 		g.setColor(Color.green.darker());
 		g.fillRect(0, HEIGHT - 120, WIDTH, 120);
-
 		g.setColor(Color.green);
 		g.fillRect(0, HEIGHT - 120, WIDTH, 20);
 
+		// color of bird
 		g.setColor(Color.magenta);
 		g.fillRect(bird.x, bird.y, bird.width, bird.height);
 
@@ -169,6 +168,7 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 			paintCoin(g, coin);
 		}
 
+		// sets color, font, size for text
 		g.setColor(Color.white);
 		g.setFont(new Font("Georgia", 1, 40));
 
@@ -185,10 +185,11 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) { // starts the class
 		GetTheCoins = new GetTheCoins();
 	}
 
+	// allows you to play the game with different keys
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		jump();
