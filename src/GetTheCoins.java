@@ -5,6 +5,7 @@
  * longer you touch a coin, the more points you get.
  */
 
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -18,6 +19,7 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 
 	public final int WIDTH = 1000, HEIGHT = 650;
 
+	private AudioClip gameOverSound, coinSound;
 	public Renderer renderer;
 
 	public Rectangle bird;
@@ -134,6 +136,9 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 					score += 1;
 					// add call for method music here
 				}
+			}
+			if (score % 2000 == 0) {
+				addCoin(true);
 			}
 
 			if (bird.y > HEIGHT - 120 || bird.y < 0) { // border top
