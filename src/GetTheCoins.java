@@ -108,6 +108,7 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int speed = 10;
@@ -132,9 +133,8 @@ public class GetTheCoins implements ActionListener, MouseListener, KeyListener {
 				if (coin.intersects(bird)) {
 					gameOver = false;
 					score += 1;
-					coin.move(-100, -100); // removes the coin as soon as it is
+					coin.move(-100, -100); // moves the coin as soon as it is
 											// touch
-					// add call for method music here
 				}
 			}
 
