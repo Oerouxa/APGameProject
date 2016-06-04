@@ -1,3 +1,7 @@
+
+/**
+ * Georgia, Carla, Nidhi
+ */
 import java.awt.Graphics;
 
 import javax.swing.JPanel;

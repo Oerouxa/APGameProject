@@ -1,6 +1,6 @@
 
 /**
- * Game by Georgia Bjarstal, Carla Balboa and Nidhi Yagnik. 
+ * Game by Georgia, Carla and Nidhi. 
  * The game consists in moving a bird to try to get coins. The 
  * longer you touch a coin, the more points you get.
  */
